@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.0'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+	//id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.example'
@@ -16,8 +16,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.hibernate.orm:hibernate-core:6.0.2.Final'  // Hibernate 6.0.2 이상
+	implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'  // Hibernate 6.0.2 이상
 	implementation 'mysql:mysql-connector-java:8.0.33'  // MySQL 드라이버 추가
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	// queryDSL
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
@@ -56,14 +57,18 @@ sourceSets {
 	}
 }
 
-querydsl {
-	jpa = true
-	querydslSourcesDir = generated
-}
+/**
+ * compileQuerydsl{
+ options.annotationProcessorPath = configurations.querydsl
+ }
+ querydsl {
+ jpa = true
+ querydslSourcesDir = generated
+ }
+ */
 
-compileQuerydsl{
-	options.annotationProcessorPath = configurations.querydsl
-}
+
+
 
 configurations {
 	compileOnly {

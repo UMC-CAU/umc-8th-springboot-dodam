@@ -24,4 +24,8 @@ public class Region {
 
     @OneToMany(mappedBy = "region")
     private List<Store> stores = new ArrayList<>();
+
+    public String getName() {
+        return regionName;
+    }
 }
