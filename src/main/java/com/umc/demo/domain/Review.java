@@ -29,7 +29,8 @@ public class Review extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private isReply reply;
+    @Builder.Default
+    private isReply reply = isReply.UNREPLIED;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)

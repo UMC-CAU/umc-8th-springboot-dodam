@@ -31,10 +31,8 @@ public class UserMission {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private isSuccess success;
-
-    @Column(nullable = false, length = 20)
-    private String region;
+    @Builder.Default
+    private isSuccess success = isSuccess.NOT_YET;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id", nullable = false)

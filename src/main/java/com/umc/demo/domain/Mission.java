@@ -30,9 +30,6 @@ public class Mission extends BaseEntity {
     @Column(nullable = false)
     private Integer deadline;
 
-    @Column(nullable = false)
-    private String region;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;

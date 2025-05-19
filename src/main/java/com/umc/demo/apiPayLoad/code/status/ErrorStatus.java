@@ -10,9 +10,11 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorStatus implements BaseErrorCode {
 
-    FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST,"COMMON4001","해당 ID를 가진 음식이 없습니다. "),
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST,"FOOD4001","해당 ID를 가진 음식이 없습니다. "),
 
-    MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST,"COMMON4002","해당 ID를 가진 미션이 없습니다.");
+    MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST,"MISSION4001","해당 ID를 가진 미션이 없습니다."),
+
+    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST,"REGION4001","해당 ID를 가진 지역이 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

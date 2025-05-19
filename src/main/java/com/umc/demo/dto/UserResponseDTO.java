@@ -20,7 +20,7 @@ public class UserResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class LoginResultDTO{
-        private Long memberId;
+        private Long userId;
         private LocalDateTime createdAt;
     }
 }
