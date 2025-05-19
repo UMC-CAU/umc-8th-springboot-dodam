@@ -1,25 +1,17 @@
 package com.umc.demo.service.StoreService;
 
-import com.umc.demo.Exception.Handler.FoodCategoryHandler;
 import com.umc.demo.Exception.Handler.StoreHandler;
 import com.umc.demo.apiPayLoad.code.status.ErrorStatus;
 import com.umc.demo.converter.ReviewConverter;
 import com.umc.demo.converter.StoreConverter;
-import com.umc.demo.converter.UserConverter;
-import com.umc.demo.converter.UserFoodConverter;
 import com.umc.demo.domain.*;
-import com.umc.demo.domain.mapping.UserFood;
 import com.umc.demo.dto.ReviewRequestDTO;
 import com.umc.demo.dto.StoreRequestDTO;
-import com.umc.demo.dto.UserRequestDTO;
 import com.umc.demo.repository.StoreRepository.StoreRepository;
 import com.umc.demo.repository.UserRepository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
