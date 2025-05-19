@@ -1,7 +1,10 @@
 package com.umc.demo.domain.mapping;
 
+import com.umc.demo.domain.FoodCategory;
 import com.umc.demo.domain.Mission;
 import com.umc.demo.domain.User;
+import com.umc.demo.domain.enums.MissionStatus;
+import com.umc.demo.domain.enums.isSuccess;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +23,19 @@ public class UserMission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private MissionStatus missionStatus;
+
+    private LocalDateTime completedAt;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private isSuccess success;
+
+    @Column(nullable = false, length = 20)
+    private String region;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
@@ -28,15 +44,15 @@ public class UserMission {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false, length = 10)
-    private String status;  // "진행완료", "진행중"
+    // 양방향 관계를 정확히 유지하기 위한 메서드
+    public void setUser(User user){
+        if(this.user != null)
+            this.user.getUserMissions().remove(this);
+        this.user = user;
+        user.getUserMissions().add(this);
+    }
 
-    @Column
-    private LocalDateTime completedAt;
-
-    @Column(nullable = false)
-    private Integer success;  // 성공 = 1, 실패 = 0
-
-    @Column(nullable = false, length = 20)
-    private String region;
+    public void setMission(Mission mission){
+        this.mission = mission;
+    }
 }

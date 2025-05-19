@@ -21,10 +21,6 @@ public class Mission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id", nullable = false)
-    private Store store;
-
     @Column(nullable = false)
     private Integer point;
 
@@ -34,7 +30,10 @@ public class Mission extends BaseEntity {
     @Column(nullable = false)
     private Integer deadline;
 
-    // 양방향 매핑
-    @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserMission> userMissions = new ArrayList<>();
+    @Column(nullable = false)
+    private String region;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id", nullable = false)
+    private Store store;
 }

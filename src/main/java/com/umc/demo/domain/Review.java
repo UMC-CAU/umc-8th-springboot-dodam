@@ -1,6 +1,7 @@
 package com.umc.demo.domain;
 
 import com.umc.demo.domain.common.BaseEntity;
+import com.umc.demo.domain.enums.isReply;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,16 @@ public class Review extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private Float rating;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String comment;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private isReply reply;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
@@ -28,16 +39,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false)
-    private Float rating; // 0 ~ 5
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String comment;
-
-    @Column(nullable = false)
-    private Integer reply; // 답글 존재 여부 (1)
-
-    // 연관 관계
+    // 양방향 매핑 : 문의와 동일
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewImage> images = new ArrayList<>();
 

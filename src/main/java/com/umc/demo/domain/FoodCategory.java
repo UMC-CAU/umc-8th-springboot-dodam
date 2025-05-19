@@ -22,10 +22,4 @@ public class FoodCategory {
 
     @Column(nullable = false, length = 20)
     private String name;
-
-    @OneToMany(mappedBy = "foodCategory")
-    private List<Store> stores = new ArrayList<>();
-
-    @OneToMany(mappedBy = "foodCategory")
-    private List<UserFood> userFoods = new ArrayList<>();
 }

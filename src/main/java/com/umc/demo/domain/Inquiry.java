@@ -1,6 +1,7 @@
 package com.umc.demo.domain;
 
 import com.umc.demo.domain.common.BaseEntity;
+import com.umc.demo.domain.enums.isReply;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,10 +18,6 @@ public class Inquiry extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     @Column(nullable = false, length = 20)
     private String title;
 
@@ -28,9 +25,14 @@ public class Inquiry extends BaseEntity {
     private String comment;
 
     @Column(nullable = false)
-    private Integer reply;  // 답글 존재 여부 (1 = 있음)
+    @Enumerated(EnumType.STRING)
+    private isReply reply;
 
-    // 양방향
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    // 양방향 매핑 : 문의 이미지와 해당 문의에 대한 답글은 문의가 사라졌을 때 같이 사라져야 함
     @OneToMany(mappedBy = "inquiry", cascade = CascadeType.ALL, orphanRemoval = true)
     private java.util.List<InquiryImage> images = new java.util.ArrayList<>();
 

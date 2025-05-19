@@ -22,10 +22,7 @@ public class Region {
     @Column(name = "region_name", nullable = false, length = 20)
     private String regionName;
 
+    // 양방향 매핑 : 해당 지역에 있는 가게를 조회할 때 사용
     @OneToMany(mappedBy = "region")
     private List<Store> stores = new ArrayList<>();
-
-    public String getName() {
-        return regionName;
-    }
 }
