@@ -3,21 +3,17 @@ package com.umc.demo.service.StoreService;
 import com.umc.demo.Exception.Handler.FoodCategoryHandler;
 import com.umc.demo.Exception.Handler.StoreHandler;
 import com.umc.demo.apiPayLoad.code.status.ErrorStatus;
+import com.umc.demo.converter.ReviewConverter;
 import com.umc.demo.converter.StoreConverter;
 import com.umc.demo.converter.UserConverter;
 import com.umc.demo.converter.UserFoodConverter;
-import com.umc.demo.domain.FoodCategory;
-import com.umc.demo.domain.Region;
-import com.umc.demo.domain.Store;
-import com.umc.demo.domain.User;
+import com.umc.demo.domain.*;
 import com.umc.demo.domain.mapping.UserFood;
+import com.umc.demo.dto.ReviewRequestDTO;
 import com.umc.demo.dto.StoreRequestDTO;
 import com.umc.demo.dto.UserRequestDTO;
 import com.umc.demo.repository.StoreRepository.StoreRepository;
-import com.umc.demo.repository.UserRepository.FoodCategoryRepository;
-import com.umc.demo.repository.UserRepository.RegionRepository;
-import com.umc.demo.repository.UserRepository.UserFoodRepository;
-import com.umc.demo.repository.UserRepository.UserRepository;
+import com.umc.demo.repository.UserRepository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +27,9 @@ public class StoreCommandServiceImpl implements StoreCommandService {
     private final StoreRepository storeRepository;
     private final FoodCategoryRepository foodCategoryRepository;
     private final RegionRepository regionRepository;
+    private final UserRepository userRepository;
+    private final ReviewRepository reviewRepository;
+    private final ReviewImageRepository reviewImageRepository;
 
     @Override
     @Transactional
@@ -45,5 +44,22 @@ public class StoreCommandServiceImpl implements StoreCommandService {
         storeRepository.save(newstore);
 
         return newstore;
+    }
+
+    @Override
+    @Transactional
+    public Review PostReview(Long storeId, ReviewRequestDTO.PostDto request) {
+
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.USER_NOT_FOUND));
+
+        Review newReview = ReviewConverter.toReview(request, store, user);
+        ReviewImage newReviewImage = ReviewConverter.toReviewImage(request, newReview);
+        reviewRepository.save(newReview);
+        reviewImageRepository.save(newReviewImage);
+
+        return newReview;
     }
 }
