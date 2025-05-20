@@ -29,8 +29,9 @@ public class StoreController {
     }
 
     @PostMapping("/{storeId}/reviews/add")
-    public ApiResponse<ReviewResponseDTO.PostResultDTO> PostReview(@PathVariable Long storeId,
-                                                                    @RequestBody @Valid ReviewRequestDTO.PostDto request){
+    public ApiResponse<ReviewResponseDTO.PostResultDTO> PostReview(
+            @PathVariable Long storeId,
+            @RequestBody @Valid ReviewRequestDTO.PostDto request){
         Review review = storeCommandService.PostReview(storeId, request);
         return ApiResponse.onSuccess(ReviewConverter.toPostResultDTO(review));
     }

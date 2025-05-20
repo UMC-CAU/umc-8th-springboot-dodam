@@ -1,11 +1,7 @@
 package com.umc.demo.domain;
 
-import com.umc.demo.domain.mapping.UserFood;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "food_category")

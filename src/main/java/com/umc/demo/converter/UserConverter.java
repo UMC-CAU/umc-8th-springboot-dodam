@@ -3,12 +3,10 @@ package com.umc.demo.converter;
 import com.umc.demo.domain.enums.Gender;
 import com.umc.demo.domain.enums.PhoneStatus;
 import com.umc.demo.domain.enums.Role;
-import com.umc.demo.domain.enums.UserStatus;
 import com.umc.demo.dto.UserRequestDTO;
 import com.umc.demo.dto.UserResponseDTO;
 import com.umc.demo.domain.User;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class UserConverter {

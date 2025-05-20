@@ -3,6 +3,7 @@ package com.umc.demo.domain.mapping;
 import com.umc.demo.domain.FoodCategory;
 import com.umc.demo.domain.Mission;
 import com.umc.demo.domain.User;
+import com.umc.demo.domain.common.BaseEntity;
 import com.umc.demo.domain.enums.MissionStatus;
 import com.umc.demo.domain.enums.isSuccess;
 import jakarta.persistence.*;
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserMission {
+public class UserMission extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,8 @@ public class UserMission {
 
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private MissionStatus missionStatus;
+    @Builder.Default
+    private MissionStatus missionStatus = MissionStatus.CHALLENGING;
 
     private LocalDateTime completedAt;
 

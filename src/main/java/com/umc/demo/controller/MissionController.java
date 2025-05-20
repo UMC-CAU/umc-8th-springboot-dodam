@@ -18,8 +18,9 @@ public class MissionController {
 
     // 가게 추가
     @PostMapping("/add/stores/{storeId}")
-    public ApiResponse<MissionResponseDTO.AddResultDTO> AddMission(@PathVariable Long storeId,
-                                                                   @RequestBody @Valid MissionRequestDTO.AddDto request){
+    public ApiResponse<MissionResponseDTO.AddResultDTO> AddMission(
+            @PathVariable Long storeId,
+            @RequestBody @Valid MissionRequestDTO.AddDto request){
         Mission mission = missionCommandService.AddMission(storeId, request);
         return ApiResponse.onSuccess(MissionConverter.toAddResultDTO(mission));
     }
