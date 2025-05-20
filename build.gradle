@@ -38,6 +38,7 @@ dependencies {
 	// Lombok
 	compileOnly 'org.projectlombok:lombok:1.18.22'
 	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+	compileOnly 'org.projectlombok:lombok'
 
 	// OpenAPI
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'

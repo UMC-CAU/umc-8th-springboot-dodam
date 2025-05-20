@@ -8,6 +8,7 @@ import com.umc.demo.converter.MissionConverter;
 import com.umc.demo.domain.Mission;
 import com.umc.demo.domain.Store;
 import com.umc.demo.domain.User;
+import com.umc.demo.domain.enums.MissionStatus;
 import com.umc.demo.domain.mapping.UserMission;
 import com.umc.demo.dto.MissionRequestDTO;
 import com.umc.demo.dto.UserMissionRequestDTO;
@@ -18,6 +19,8 @@ import com.umc.demo.repository.UserRepository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +42,11 @@ public class UserMissionCommandServiceImpl implements UserMissionCommandService 
         userMissionRepository.save(newuserMission);
 
         return newuserMission;
+    }
+    @Override
+    @Transactional
+    public boolean isExist(Long value, Long userId){
+        boolean isValid = userMissionRepository.existsByUserIdAndMissionIdAndMissionStatus(value, userId, MissionStatus.CHALLENGING);
+        return isValid;
     }
 }

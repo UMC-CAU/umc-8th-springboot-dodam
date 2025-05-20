@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class StoreCommandServiceImpl implements StoreCommandService {
@@ -53,5 +55,12 @@ public class StoreCommandServiceImpl implements StoreCommandService {
         reviewImageRepository.save(newReviewImage);
 
         return newReview;
+    }
+
+    @Override
+    @Transactional
+    public boolean isExist(Long value){
+        boolean isValid = storeRepository.existsById(value);
+        return isValid;
     }
 }

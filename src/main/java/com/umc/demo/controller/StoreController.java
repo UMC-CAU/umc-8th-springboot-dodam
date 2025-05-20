@@ -10,8 +10,10 @@ import com.umc.demo.dto.ReviewResponseDTO;
 import com.umc.demo.dto.StoreRequestDTO;
 import com.umc.demo.dto.StoreResponseDTO;
 import com.umc.demo.service.StoreService.StoreCommandService;
+import com.umc.demo.validation.annotation.ExistStores;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,9 +30,10 @@ public class StoreController {
         return ApiResponse.onSuccess(StoreConverter.toAddResultDTO(store));
     }
 
+    @Validated
     @PostMapping("/{storeId}/reviews/add")
     public ApiResponse<ReviewResponseDTO.PostResultDTO> PostReview(
-            @PathVariable Long storeId,
+            @PathVariable @ExistStores Long storeId,
             @RequestBody @Valid ReviewRequestDTO.PostDto request){
         Review review = storeCommandService.PostReview(storeId, request);
         return ApiResponse.onSuccess(ReviewConverter.toPostResultDTO(review));

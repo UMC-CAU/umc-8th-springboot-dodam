@@ -43,4 +43,12 @@ public class UserCommandServiceImpl implements UserCommandService {
 
         return newUser;
     }
+
+    @Override
+    @Transactional
+    public boolean isExist(List<Long> values){
+        boolean isValid = values.stream()
+                .allMatch(value -> foodCategoryRepository.existsById(value));
+        return isValid;
+    }
 }
