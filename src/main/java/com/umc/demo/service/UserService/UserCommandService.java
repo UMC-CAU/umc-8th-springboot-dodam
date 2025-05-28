@@ -6,6 +6,6 @@ import com.umc.demo.dto.UserRequestDTO;
 import java.util.List;
 
 public interface UserCommandService {
-    public User LoginUser(UserRequestDTO.LoginDto request);
-    public boolean isExist(List<Long> values);
+    User LoginUser(UserRequestDTO.LoginDto request);
+    boolean isExist(List<Long> values);
 }

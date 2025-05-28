@@ -1,6 +1,16 @@
 package com.umc.demo.service.StoreService;
 
+import com.umc.demo.Exception.Handler.PageHandler;
+import com.umc.demo.Exception.Handler.UserHandler;
+import com.umc.demo.apiPayLoad.code.status.ErrorStatus;
+import com.umc.demo.domain.Mission;
+import com.umc.demo.domain.Review;
+import com.umc.demo.domain.User;
+import com.umc.demo.repository.UserRepository.MissionRepository;
+import com.umc.demo.repository.UserRepository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.umc.demo.domain.Store;
@@ -15,6 +25,8 @@ import java.util.Optional;
 public class StoreQueryServiceImpl implements StoreQueryService{
 
     private final StoreRepository storeRepository;
+    private final ReviewRepository reviewRepository;
+    private final MissionRepository missionRepository;
 
     @Override
     public Optional<Store> findStore(Long id) {
@@ -28,5 +40,24 @@ public class StoreQueryServiceImpl implements StoreQueryService{
         filteredStores.forEach(store -> System.out.println("Store: " + store));
 
         return filteredStores;
+    }
+
+    @Override
+    public Page<Review> getReviewList(Long storeId, Integer page){
+        Store store = storeRepository.findById(storeId).get();
+        Page<Review> StorePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return StorePage;
+    }
+
+    @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page){
+        page -= 1;
+        Store store = storeRepository.findById(storeId).get();
+        Page<Mission> MissionPage = missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+        // 요청한 페이지 인덱스가 넘어갔을 경우
+        if (page >= MissionPage.getTotalPages()) {
+            throw new PageHandler(ErrorStatus.PAGE_FAULT);
+        }
+        return MissionPage;
     }
 }

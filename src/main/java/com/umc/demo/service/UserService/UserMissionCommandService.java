@@ -8,6 +8,6 @@ import com.umc.demo.dto.UserRequestDTO;
 import java.util.List;
 
 public interface UserMissionCommandService {
-    public UserMission ChallengeMission(Long userId, UserMissionRequestDTO.ChallengeDto request);
-    public boolean isExist(Long Mission, Long userId);
+    UserMission ChallengeMission(Long userId, UserMissionRequestDTO.ChallengeDto request);
+    boolean isExist(Long Mission, Long userId);
 }

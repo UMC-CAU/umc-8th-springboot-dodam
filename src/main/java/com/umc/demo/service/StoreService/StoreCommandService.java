@@ -8,9 +8,9 @@ import com.umc.demo.dto.StoreRequestDTO;
 import java.util.List;
 
 public interface StoreCommandService {
-    public Store AddStore(StoreRequestDTO.AddDto request);
+    Store AddStore(StoreRequestDTO.AddDto request);
 
-    public Review PostReview(Long storeId, ReviewRequestDTO.PostDto request);
+    Review PostReview(Long storeId, ReviewRequestDTO.PostDto request);
 
-    public boolean isExist(Long value);
+    boolean isExist(Long value);
 }

@@ -6,5 +6,5 @@ import com.umc.demo.dto.MissionRequestDTO;
 import com.umc.demo.dto.StoreRequestDTO;
 
 public interface MissionCommandService {
-    public Mission AddMission(Long storeId, MissionRequestDTO.AddDto request);
+    Mission AddMission(Long storeId, MissionRequestDTO.AddDto request);
 }
