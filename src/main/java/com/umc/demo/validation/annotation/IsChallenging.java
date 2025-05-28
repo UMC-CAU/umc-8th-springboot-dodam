@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target( { ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER })   // 어노테이션 적용 범위 지정
 @Retention(RetentionPolicy.RUNTIME)   // 어노테이션 생명 주기
 public @interface IsChallenging {
-    String message() default "해당하는 미션이 존재하지 않습니다.";
+    String message() default "이미 도전 중인 미션입니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
