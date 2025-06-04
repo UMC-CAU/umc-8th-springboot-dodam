@@ -1,0 +1,76 @@
+<!DOCTYPE html>Add commentMore actions
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>회원가입</title>
+  <style>
+    /* 기존 스타일 유지 */
+  </style>
+</head>
+<body>
+<h2>회원가입</h2>
+<form th:action="@{/users/signup}" th:object="${userLoginDto}" method="post">
+  <div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
+  <div>
+    <label for="name">이름:</label>
+    <input type="text" id="name" th:field="*{name}" required>
+  </div>
+  <div>
+    <label for="email">이메일:</label>
+    <input type="email" id="email" th:field="*{email}" required>
+  </div>
+  <div>
+    <label for="password">비밀번호:</label>
+    <input type="password" id="password" th:field="*{password}" required>
+  </div>
+  <div>
+    <label for="gender">성별:</label>
+    <select id="gender" th:field="*{gender}">
+      <option value="1">남성</option>
+      <option value="2">여성</option>
+      <option value="0">선택안함</option>
+    </select>
+  </div>
+  <div>
+    <label for="birth">생년월일:</label>
+    <input type="date" id="birth" th:field="*{birth}" required>
+  </div>
+  <div>
+    <label for="address">주소:</label>
+    <input type="text" id="address" th:field="*{address}" required>
+  </div>
+  <div>
+    <label>선호 카테고리:</label>
+    <div class="userFoods">
+      <label><input type="checkbox" name="userFoods" value="1"> 한식</label>
+      <label><input type="checkbox" name="userFoods" value="2"> 일식</label>
+      <label><input type="checkbox" name="userFoods" value="3"> 중식</label>
+      <label><input type="checkbox" name="userFoods" value="4"> 양식</label>
+      <label><input type="checkbox" name="userFoods" value="5"> 치킨</label>
+      <label><input type="checkbox" name="userFoods" value="6"> 분식</label>
+      <label><input type="checkbox" name="userFoods" value="7"> 고기/구이</label>
+      <label><input type="checkbox" name="userFoods" value="8"> 도시락</label>
+      <label><input type="checkbox" name="userFoods" value="9"> 야식</label>
+      <label><input type="checkbox" name="userFoods" value="10"> 패스트푸드</label>
+      <label><input type="checkbox" name="userFoods" value="11"> 디저트</label>
+      <label><input type="checkbox" name="userFoods" value="12"> 아시안푸드</label>
+    </div>
+  </div>
+  <div>
+    <label for="role">역할:</label>
+    <select id="role" th:field="*{role}">
+      <option value="0">일반 사용자</option>
+      <option value="1">관리자</option>
+    </select>
+  </div>
+  <div>
+    <label for="phoneStatus">휴대폰 인증:</label>
+    <select id="phoneStatus" th:field="*{phoneStatus}">
+      <option value="1">인증완료</option>
+      <option value="0">미인증</option>
+    </select>
+  </div>
+  <button type="submit">가입하기</button>
+</form>
+</body>
+</html>
